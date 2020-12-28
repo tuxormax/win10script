@@ -214,13 +214,7 @@ Function menuSysTweaks()
 	Else
 		oWSH.RegWrite "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC\EnableMtcUvc", 1, "REG_DWORD"
 	End If
-	printl " # Utilizar el centro de notificaciones clasico? (s/n) > "
-	If LCase(scanf) = "s" Then
-		oWSH.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell\UseActionCenterExperience", 0, "REG_DWORD"
-	Else
-		oWSH.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell\UseActionCenterExperience", 1, "REG_DWORD"
-	End If
-	printl " # Utilizar el visor de fotos clasico? (s/n) > "
+	printl " # Utilizar el visor de fotos clasico? (s/n) > (HAY QUE CORREGIR ESTA SECCION, PORQUE NO ACTIVA EL VISOR  DE FOTOS CLASICO)"
 	If LCase(scanf) = "s" Then
 		oWEB.Open "GET", "https://raw.githubusercontent.com/aikoncwd/win10script/master/dependencias/photoview.reg", False
 		oWEB.Send
@@ -604,7 +598,7 @@ Function menuWindowsDefender()
 	printf ""
 	printf "  1 = Deshabilitar Microsoft Windows Defender"
 	printf "  2 = Habilitar Microsoft Windows Defender"
-	printf ""
+	printf " HAY QUE CORREGIR TODA ESTA SECCION, PORQUE NO DESACTIVA WINDOWS DEFENDER"
 	printf "  0 = Volver al menu principal"
 	printf ""
 	printl "  > "
@@ -668,7 +662,7 @@ Function menuWindowsUpdate()
 	printf "| | | | |   | . | . | | | |_ -|  |  |  | . | . | .'|  _| -_|"
 	printf "|_____|_|_|_|___|___|_____|___|  |_____|  _|___|_|_|_| |___|"
 	printf "                                       |_|                  "
-	printf ""
+	printf "REVISAR EL PROGRAMA WUB https://www.sordum.org/9470/windows-update-blocker-v1-6/ porque ese bloquea todos los servicios, y se complementa con el script que has escrito, seria bueno que tu script bloqueara todo como ese programa"
 	printl " # Deshabilitar 'Windows Auto Update'? (s/n) > "
 	If LCase(scanf) = "s" Then
 		oWSH.RegWrite "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\DeferUpgrade", 1, "REG_DWORD"
@@ -759,7 +753,7 @@ Function menuPerfomance()
 		oWSH.Run "sc start EFS"
 		oWSH.Run "sc start CscService"
 	End If
-	printf ""
+	printf "quitar esta seccion, ya que todos usan el wifi"
 	printf " >> No utilizar si usas un portatil o Wifi <<"
 	printf ""
 	printl " # Deshabilitar servicios Wifi? (s/n) > "
@@ -804,7 +798,7 @@ Function menuPerfomance()
 		End If
 		wait(3)
 	End If
-	printl " # Habilitar el 100% del ancho de banda para el sistema? (s/n) > "
+	printl " # Habilitar el 100% del ancho de banda para el sistema? (s/n) >  esto deberia ser habilitado por default en los tweaks de mejora del sistema"
 	If LCase(scanf) = "s" Then
 		oWSH.RegWrite "HKLM\SOFTWARE\Policies\Microsoft\Windows\Psched\Psched", 0, "REG_DWORD"
 	Else
@@ -986,18 +980,16 @@ Function menuCleanApps()
 		oWSH.Run "powershell get-appxpackage -Name *Microsoft.People* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *MicrosoftOfficeHub* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *MicrosoftSolitaireCollection* | Remove-AppxPackage", 1, True
-		oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *WindowsAlarms* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *WindowsMaps* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *WindowsPhone* | Remove-AppxPackage", 1, True
-		oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *windowscommunicationsapps* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *CandyCrushSaga* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *Messagin* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *ConnectivityStore* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *CommsPhone* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -Name *Office.Sway* | Remove-AppxPackage", 1, True
-		printf ""
+		printf " se quito de la lista la camara y sound recorder ya que los usuarios lo usan mucho"
 		printf " > Las Apps se han desinstalado correctamente..."
 	Else
 		printf ""
